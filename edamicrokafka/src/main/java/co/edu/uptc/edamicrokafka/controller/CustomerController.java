@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.uptc.edamicrokafka.model.Customer;
-import co.edu.uptc.edamicrokafka.service.CustomerEventProducer;
+import co.edu.uptc.edamicrokafka.model.customer.Customer;
+import co.edu.uptc.edamicrokafka.model.customer.CustomerPassword;
+import co.edu.uptc.edamicrokafka.service.customer.CustomerEventProducer;
 import co.edu.uptc.edamicrokafka.utils.JsonUtils;
 
 
@@ -22,9 +23,9 @@ public class CustomerController {
 
     @PostMapping("/addcustomer")
     public String sendMessageAddCustomer(@RequestBody String customer) {
-        Customer customerObj = new Customer();
-        customerObj = jsonUtils.fromJson(customer, Customer.class);
-        customerEventProducer.sendAddCustomerEvent(customerObj);        
+        CustomerPassword customerPassword = new CustomerPassword();
+        customerPassword = jsonUtils.fromJson(customer, CustomerPassword.class);
+        customerEventProducer.sendAddCustomerEvent(customerPassword.getCustomer(), customerPassword.getPassword());        
         return customerEventProducer.toString();
     }
     @PostMapping("/editcustomer")
@@ -37,11 +38,11 @@ public class CustomerController {
     @GetMapping("/findcustomerbyid/{document}")
     public String sendMessageFindCustomer(@PathVariable String document) {
         customerEventProducer.sendFindByCustomerIDEvent(document);
-        return customerEventProducer.toString();
+        return "Petición de encontrar por id enviada";
     }
     @GetMapping("/findallcustomers")
-    public List<Customer> sendMessageFindAllCustomers() {
+    public String sendMessageFindAllCustomers() {
             customerEventProducer.sendFindAllOrdersEvent("findall");
-            return null;
+            return "Solicitud de todos los usuarios enviada";
     }
 }

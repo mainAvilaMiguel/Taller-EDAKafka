@@ -1,4 +1,4 @@
-package co.edu.uptc.edamicrokafka.service;
+package co.edu.uptc.edamicrokafka.service.customer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.uptc.edamicrokafka.model.Customer;
+import co.edu.uptc.edamicrokafka.model.customer.Customer;
 import co.edu.uptc.edamicrokafka.repository.CustomerRepository;
 
 @Service

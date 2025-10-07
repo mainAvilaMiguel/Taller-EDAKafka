@@ -1,4 +1,4 @@
-package co.edu.uptc.edamicrokafka.model;
+package co.edu.uptc.edamicrokafka.model.order;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
